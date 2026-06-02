@@ -16,9 +16,7 @@ import {
 
 const router = express.Router();
 
-// ========================================
 // Rutas públicas
-// ========================================
 
 // Registrar nuevo usuario
 router.post("/register", registerUser);
@@ -26,9 +24,7 @@ router.post("/register", registerUser);
 // Login de usuario
 router.post("/login", loginUser);
 
-// ========================================
 // Rutas protegidas - Solo para administradores
-// ========================================
 
 // obtener todos los usuarios
 router.get("/", protect, admin, getUsers);
