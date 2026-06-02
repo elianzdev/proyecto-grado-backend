@@ -2,15 +2,13 @@ import jwt from "jsonwebtoken";
 
 import User from "../models/user.js";
 
-// ========================================
-// Protect Middleware
-// ========================================
+// Protección de rutas - Verificar token y autenticar usuario
 
 export const protect = async (req, res, next) => {
   try {
     let token;
 
-    // Check Authorization Header
+    // verificar si el token está presente en el encabezado de autorización
     if (
       req.headers.authorization &&
       req.headers.authorization.startsWith("Bearer")
@@ -18,7 +16,7 @@ export const protect = async (req, res, next) => {
       token = req.headers.authorization.split(" ")[1];
     }
 
-    // Token not found
+    // Si no hay token, no autorizado
     if (!token) {
       return res.status(401).json({
         success: false,
@@ -26,13 +24,13 @@ export const protect = async (req, res, next) => {
       });
     }
 
-    // Verify Token
+    // Verificar token
     const decoded = jwt.verify(
       token,
       process.env.JWT_SECRET
     );
 
-    // Find User
+    // Buscar usuario por ID y excluir la contraseña
     const user = await User.findById(decoded.id).select(
       "-contraseña"
     );
@@ -44,7 +42,7 @@ export const protect = async (req, res, next) => {
       });
     }
 
-    // Attach user to request
+    // Adjuntar el usuario autenticado al objeto de solicitud
     req.usuario = user;
 
     next();
@@ -58,9 +56,8 @@ export const protect = async (req, res, next) => {
   }
 };
 
-// ========================================
-// Admin Middleware
-// ========================================
+
+// Admin Middleware - Verificar si el usuario es admin
 
 export const admin = (req, res, next) => {
   try {

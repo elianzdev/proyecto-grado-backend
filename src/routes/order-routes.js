@@ -12,13 +12,13 @@ import {
 const router = express.Router();
 
 // ========================================
-// Protected Routes
+// rutas protegidas - Solo para usuarios autenticados
 // ========================================
 
-// Create Order
+// Crear una nueva orden
 router.post("/", protect, createOrder);
 
-// Get User Purchased Courses
+// Obtener los cursos comprados por el usuario
 router.get("/my-courses", protect, getUserCourses);
 
 export default router;

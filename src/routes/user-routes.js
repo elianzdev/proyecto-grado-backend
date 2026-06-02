@@ -17,29 +17,29 @@ import {
 const router = express.Router();
 
 // ========================================
-// Public Routes
+// Rutas públicas
 // ========================================
 
-// Register User
+// Registrar nuevo usuario
 router.post("/register", registerUser);
 
-// Login User
+// Login de usuario
 router.post("/login", loginUser);
 
 // ========================================
-// Protected Routes
+// Rutas protegidas - Solo para administradores
 // ========================================
 
-// Get All Users
+// obtener todos los usuarios
 router.get("/", protect, admin, getUsers);
 
-// Get User By ID
+// Obtener usuario por ID
 router.get("/:id", protect, getUserById);
 
-// Update User
+// Actualizar usuario
 router.put("/:id", protect, updateUser);
 
-// Delete User
+// Eliminar usuario
 router.delete("/:id", protect, admin, deleteUser);
 
 export default router;

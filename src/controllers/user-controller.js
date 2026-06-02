@@ -3,9 +3,7 @@ import jwt from "jsonwebtoken";
 
 import User from "../models/user.js";
 
-// ========================================
-// Register User
-// ========================================
+// Registrar un nuevo usuario
 
 export const registerUser = async (req, res) => {
   try {
@@ -52,9 +50,8 @@ export const registerUser = async (req, res) => {
   }
 };
 
-// ========================================
-// Login User
-// ========================================
+
+// Login de usuario
 
 export const loginUser = async (req, res) => {
   try {
@@ -121,9 +118,8 @@ export const loginUser = async (req, res) => {
   }
 };
 
-// ========================================
-// Get All Users
-// ========================================
+
+// obtener todos los usuarios
 
 export const getUsers = async (req, res) => {
   try {
@@ -143,9 +139,8 @@ export const getUsers = async (req, res) => {
   }
 };
 
-// ========================================
-// Get User By ID
-// ========================================
+
+// Obtener usuario por ID
 
 export const getUserById = async (req, res) => {
   try {
@@ -171,9 +166,8 @@ export const getUserById = async (req, res) => {
   }
 };
 
-// ========================================
-// Update User
-// ========================================
+
+// Actualizar usuario
 
 export const updateUser = async (req, res) => {
   try {
@@ -213,9 +207,8 @@ export const updateUser = async (req, res) => {
   }
 };
 
-// ========================================
-// Delete User
-// ========================================
+
+// Eliminar un usuario
 
 export const deleteUser = async (req, res) => {
   try {

@@ -1,8 +1,6 @@
 import Course from "../models/course.js";
 
-// ========================================
-// Create Course
-// ========================================
+// Crear un nuevo curso
 
 export const createCourse = async (req, res) => {
   try {
@@ -55,9 +53,8 @@ export const createCourse = async (req, res) => {
   }
 };
 
-// ========================================
-// Get All Courses
-// ========================================
+
+// obtener todos los cursos
 
 export const getCourses = async (req, res) => {
   try {
@@ -80,9 +77,8 @@ export const getCourses = async (req, res) => {
   }
 };
 
-// ========================================
-// Get Course By ID
-// ========================================
+
+// obtener un curso por ID
 
 export const getCourseById = async (req, res) => {
   try {
@@ -111,9 +107,8 @@ export const getCourseById = async (req, res) => {
   }
 };
 
-// ========================================
-// Update Course
-// ========================================
+
+// Actualizar un curso
 
 export const updateCourse = async (req, res) => {
   try {
@@ -145,9 +140,8 @@ export const updateCourse = async (req, res) => {
   }
 };
 
-// ========================================
-// Delete Course
-// ========================================
+
+// Eliminar un curso
 
 export const deleteCourse = async (req, res) => {
   try {
@@ -175,9 +169,8 @@ export const deleteCourse = async (req, res) => {
   }
 };
 
-// ========================================
-// Get Course Content
-// ========================================
+
+// Obtener el contenido de un curso
 
 export const getCourseContent = async (req, res) => {
   try {

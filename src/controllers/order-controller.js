@@ -1,8 +1,6 @@
 import Order from "../models/order.js";
 
-// ========================================
-// Create Order
-// ========================================
+// Crear una nueva orden
 
 export const createOrder = async (req, res) => {
   try {
@@ -48,9 +46,8 @@ export const createOrder = async (req, res) => {
   }
 };
 
-// ========================================
-// Get User Purchased Courses
-// ========================================
+
+// Obtener los cursos comprados por el usuario
 
 export const getUserCourses = async (req, res) => {
   try {

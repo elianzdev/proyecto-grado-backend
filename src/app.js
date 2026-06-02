@@ -13,15 +13,12 @@ import errorMiddleware from "./middlewares/error-middleware.js";
 
 const app = express();
 
-// ========================================
-// Security Middlewares
-// ========================================
+// segurridad - Helmet para proteger contra vulnerabilidades comunes
 
 app.use(helmet());
 
-// ========================================
-// Rate Limiting
-// ========================================
+// Rate Limiting - Limitar el número de solicitudes por IP para prevenir ataques de fuerza bruta
+
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -35,9 +32,7 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
-// ========================================
-// Core Middlewares
-// ========================================
+// Core Middleware - CORS para permitir solicitudes desde el frontend
 
 app.use(
   cors({
@@ -54,17 +49,14 @@ app.use(
   })
 );
 
-// ========================================
-// Logger
-// ========================================
+// Logger - Morgan para registrar solicitudes HTTP en desarrollo
 
 if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
 
-// ========================================
-// Health Check
-// ========================================
+
+// Rutas básicas
 
 app.get("/", (req, res) => {
   res.status(200).json({
@@ -73,9 +65,8 @@ app.get("/", (req, res) => {
   });
 });
 
-// ========================================
-// API Routes
-// ========================================
+
+// Rutas de la API
 
 app.use("/api/users", userRoutes);
 
@@ -83,9 +74,7 @@ app.use("/api/courses", courseRoutes);
 
 app.use("/api/orders", orderRoutes);
 
-// ========================================
-// Error Middlewares
-// ========================================
+// Error Handling Middleware - Manejar rutas no encontradas y errores generales
 
 app.use(notFoundMiddleware);
 

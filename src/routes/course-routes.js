@@ -16,9 +16,8 @@ import {
 
 const router = express.Router();
 
-// ========================================
-// Public Routes
-// ========================================
+// Rutas públicas
+
 
 router.get("/", getCourses);
 
@@ -26,9 +25,8 @@ router.get("/:id", getCourseById);
 
 router.get("/:id/content", getCourseContent);
 
-// ========================================
-// Protected Routes
-// ========================================
+// Rutas protegidas - Solo para administradores
+
 
 router.post("/", protect, admin, createCourse);
 

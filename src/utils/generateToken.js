@@ -2,9 +2,7 @@ import jwt from "jsonwebtoken";
 
 import User from "../models/user.js";
 
-// ========================================
-// Protect Routes Middleware
-// ========================================
+// Protección de rutas - Verificar token y autenticar usuario
 
 export const protect = async (req, res, next) => {
   try {
@@ -30,7 +28,7 @@ export const protect = async (req, res, next) => {
       });
     }
 
-    // Attach authenticated user
+    // Adjuntar el usuario autenticado al objeto de solicitud
     req.usuario = user;
 
     next();
@@ -45,9 +43,7 @@ export const protect = async (req, res, next) => {
   }
 };
 
-// ========================================
-// Admin Middleware
-// ========================================
+// Admin Middleware - Verificar si el usuario es admin
 
 export const admin = (req, res, next) => {
   try {
