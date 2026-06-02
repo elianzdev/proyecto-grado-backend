@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Build & Production
+dist/
+build/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Coverage & Testing
+coverage/
+jest-html-reporters-*
+
+# Temporary files
+tmp/
+temp/
+.cache/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Editors & IDEs
+.vscode/
+.idea/
+
+# MongoDB local data
+data/db/
+dump/
+
+# Process files
+pids/
+*.pid
+*.seed
