@@ -11,9 +11,7 @@ import {
 
 const router = express.Router();
 
-// ========================================
 // rutas protegidas - Solo para usuarios autenticados
-// ========================================
 
 // Crear una nueva orden
 router.post("/", protect, createOrder);
