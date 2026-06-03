@@ -42,33 +42,33 @@ Este proyecto implementa el backend de una plataforma de cursos en línea. Está
 ## Estructura del proyecto
 
 ```text
-backend/
-  package.json
-  pnpm-lock.yaml
-  README.md
-  src/
-    app.js
-    server.js
-    config/
-      db.js
-    controllers/
-      course-controller.js
-      order-controller.js
-      user-controller.js
-    middlewares/
-      auth-middleware.js
-      error-middleware.js
-      notFound-middleware.js
-    models/
-      course.js
-      order.js
-      user.js
-    routes/
-      course-routes.js
-      order-routes.js
-      user-routes.js
-    utils/
-      generateToken.js
+backend
+├─ package.json
+├─ pnpm-lock.yaml
+├─ README.md
+└─ src
+   ├─ app.js
+   ├─ server.js
+   ├─ config
+   │  └─ db.js
+   ├─ controllers
+   │  ├─ course-controller.js
+   │  ├─ order-controller.js
+   │  └─ user-controller.js
+   ├─ middlewares
+   │  ├─ auth-middleware.js
+   │  ├─ error-middleware.js
+   │  └─ notFound-middleware.js
+   ├─ models
+   │  ├─ course.js
+   │  ├─ order.js
+   │  └─ user.js
+   ├─ routes
+   │  ├─ course-routes.js
+   │  ├─ order-routes.js
+   │  └─ user-routes.js
+   └─ utils
+      └─ generateToken.js
 ```
 
 ## Flujo de ejecución
