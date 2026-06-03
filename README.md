@@ -43,29 +43,31 @@ Este proyecto implementa el backend de una plataforma de cursos en línea. Está
 
 ```text
 backend
-└─ src
-   ├─ app.js
-   ├─ server.js
-   ├─ config
-   │  └─ db.js
-   ├─ controllers
-   │  ├─ course-controller.js
-   │  ├─ order-controller.js
-   │  └─ user-controller.js
-   ├─ middlewares
-   │  ├─ auth-middleware.js
-   │  ├─ error-middleware.js
-   │  └─ notFound-middleware.js
-   ├─ models
-   │  ├─ course.js
-   │  ├─ order.js
-   │  └─ user.js
-   ├─ routes
-   │  ├─ course-routes.js
-   │  ├─ order-routes.js
-   │  └─ user-routes.js
-   └─ utils
-      └─ generateToken.js
+├─ src
+│  ├─ app.js
+│  ├─ server.js
+│  ├─ config
+│  │  └─ db.js
+│  ├─ controllers
+│  │  ├─ course-controller.js
+│  │  ├─ order-controller.js
+│  │  └─ user-controller.js
+│  ├─ middlewares
+│  │  ├─ auth-middleware.js
+│  │  ├─ error-middleware.js
+│  │  └─ notFound-middleware.js
+│  ├─ models
+│  │  ├─ course.js
+│  │  ├─ order.js
+│  │  └─ user.js
+│  ├─ routes
+│  │  ├─ course-routes.js
+│  │  ├─ order-routes.js
+│  │  └─ user-routes.js
+│  ├─ utils
+│  │  └─ generateToken.js
+│  ├─ app.js
+│  └─ server.js
 ├─ package.json
 ├─ pnpm-lock.yaml
 └─ README.md
