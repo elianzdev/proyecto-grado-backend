@@ -1,198 +1,123 @@
-# Emprendix Backend
+# Backend API - Proyecto Grado
 
-Backend para la plataforma, un sistema de cursos para microemprendedores desarrollado con Node.js, Express.js y MongoDB.
+Este directorio contiene el backend de la aplicación de cursos. Está construido con Node.js, Express y MongoDB, y sigue una arquitectura modular con controladores, modelos, rutas y middlewares.
 
----
+## Tecnologías y herramientas
 
-## Características
+- Node.js
+- Express
+- MongoDB con Mongoose
+- JSON Web Tokens (JWT)
+- `bcryptjs` para hashing de contraseñas
+- `dotenv` para variables de entorno
+- `cors`, `helmet`, `express-rate-limit` y `morgan`
+- `nodemon` para desarrollo
 
-- Autenticación de usuarios (JWT)
-- Sistema de roles (administrador y usuario)
-- Gestión de cursos y módulos educativos
-- Sistema de inscripción a cursos
-- Progreso del usuario por curso
-- Carrito de compras de cursos
-- Gestión de pagos simulados o integrables
-- Panel de administración de cursos
-- API REST documentada
-- Sistema de categorías de cursos
+## Cómo ejecutar
 
----
+1. Instala dependencias:
+   - `pnpm install` o `npm install`
+2. Crea un archivo `.env` con al menos:
+   - `PORT=5000`
+   - `MONGO_URI=<tu_uri_de_mongodb>`
+   - `JWT_SECRET=<una_clave_secreta>`
+3. Inicia el servidor en desarrollo:
+   - `pnpm dev` o `npm run dev`
+4. Inicia el servidor en producción:
+   - `pnpm start` o `npm start`
 
-## Estructura del Proyecto
+## Estructura del proyecto
 
-​```
+```
 backend/
-├── src/
-│   ├── config/
-│   │   └── db.js          # Conexión a MongoDB
-│   ├── controllers/             # Lógica de negocio
-│   │   ├── auth-controller.js
-│   │   ├── course-controller.js
-│   │   ├── user-controller.js
-│   │   ├── cart.controller.js
-│   │   └── admin.controller.js
-│   ├── middleware/              # Middleware (auth, roles, errores)
-│   │   ├── auth.middleware.js
-│   │   └── role.middleware.js
-│   ├── models/                  # Esquemas de MongoDB (Mongoose)
-│   │   ├── User.js
-│   │   ├── Course.js
-│   │   ├── Category.js
-│   │   ├── Cart.js
-│   │   └── Enrollment.js
-│   ├── routes/                  # Rutas de la API
-│   │   ├── auth.routes.js
-│   │   ├── course.routes.js
-│   │   ├── user.routes.js
-│   │   ├── cart.routes.js
-│   │   └── admin.routes.js
-│   ├── utils/                   # Utilidades (JWT, helpers)
-│   └── server.js                # Punto de entrada
-├── .env.example
-├── .gitignore
-├── package.json
-└── README.md
-​```
+  package.json
+  pnpm-lock.yaml
+  README.md
+  src/
+    app.js
+    server.js
+    config/
+      db.js
+    controllers/
+      course-controller.js
+      order-controller.js
+      user-controller.js
+    middlewares/
+      auth-middleware.js
+      error-middleware.js
+      notFound-middleware.js
+    models/
+      course.js
+      order.js
+      user.js
+    routes/
+      course-routes.js
+      order-routes.js
+      user-routes.js
+    utils/
+      generateToken.js
+```
 
----
+## Descripción general
 
-## Instalación
+- `src/server.js`
+  - Carga variables de entorno y conecta con MongoDB.
+  - Arranca el servidor Express en el puerto configurado.
+- `src/app.js`
+  - Configura middleware global: seguridad, CORS, límite de peticiones, parsing JSON, logging y rutas.
+  - Registra rutas de usuarios, cursos y ordenes.
+  - Añade manejo centralizado de rutas no encontradas y errores.
+- `src/config/db.js`
+  - Conecta a la base de datos MongoDB usando Mongoose.
 
-**1. Clonar el repositorio:**
-​```bash
-git clone <repo-url>
-​```
+## API principal
 
-**2. Instalar dependencias:**
-​```bash
-npm install
-​```
+### Usuarios
 
-**3. Configurar variables de entorno:**
-​```bash
-cp .env.example .env
-​```
+- `POST /api/users/register` - registrar un usuario nuevo.
+- `POST /api/users/login` - iniciar sesión y recibir token JWT.
+- `GET /api/users/` - listar usuarios (requiere token y rol `admin`).
+- `GET /api/users/:id` - obtener usuario por ID.
+- `PUT /api/users/:id` - actualizar usuario.
+- `DELETE /api/users/:id` - eliminar usuario (requiere `admin`).
 
-**4. Configurar MongoDB:**
+### Cursos
 
-Crear un cluster en [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) o usar una instancia local, luego agregar la URI en el archivo `.env`:
+- `GET /api/courses/` - obtener todos los cursos.
+- `GET /api/courses/:id` - obtener un curso por ID.
+- `GET /api/courses/:id/content` - obtener el contenido de un curso.
+- `POST /api/courses/` - crear un curso (requiere token y `admin`).
+- `PUT /api/courses/:id` - actualizar curso (requiere `admin`).
+- `DELETE /api/courses/:id` - eliminar curso (requiere `admin`).
 
-​```env
-MONGO_URI=mongodb+srv://usuario:password@cluster.mongodb.net/emprendix
-JWT_SECRET=tu_secreto_super_seguro
-PORT=3000
-​```
+### Ordenes
 
-**5. Ejecutar el servidor:**
-​```bash
-npm run dev
-​```
+- `POST /api/orders/` - crear orden de compra (requiere token).
+- `GET /api/orders/my-courses` - obtener cursos comprados del usuario autenticado.
 
----
+## Modelos principales
 
-## Estructura de Base de Datos (MongoDB)
+- `User`
+  - `nombre`, `correo`, `contraseña`, `rol`
+- `Course`
+  - `titulo`, `descripcion`, `nivel`, `duracion`, `precio`, `categoria`, `imagenPortada`, `contenido`, `instructor`
+  - `contenido` incluye módulos, lecciones y preguntas.
+- `Order`
+  - `usuario`, `cursos`, `total`
 
-### Colecciones Principales
+## Middlewares
 
-| Colección     | Descripción                          |
-|---------------|--------------------------------------|
-| `users`       | Usuarios del sistema                 |
-| `courses`     | Cursos disponibles                   |
-| `categories`  | Categorías de cursos                 |
-| `carts`       | Carrito de compras                   |
-| `enrollments` | Cursos inscritos por usuario         |
-| `progress`    | Progreso por curso del usuario       |
-| `reviews`     | Reseñas de cursos                    |
+- `auth-middleware.js`
+  - `protect`: valida el JWT y agrega `req.usuario`.
+  - `admin`: valida que el usuario tenga el rol `admin`.
+- `notFound-middleware.js`
+  - Captura rutas no definidas.
+- `error-middleware.js`
+  - Maneja errores y devuelve una respuesta JSON uniforme.
 
-### Relaciones Principales
+## Notas adicionales
 
-- Un usuario puede tener múltiples cursos inscritos
-- Un curso pertenece a una categoría
-- Un usuario tiene un carrito activo
-- Un usuario puede dejar reseñas en cursos
-
----
-
-## API Endpoints
-
-### Autenticación — `/api/auth`
-
-| Método | Ruta        | Descripción                |
-|--------|-------------|----------------------------|
-| POST   | `/register` | Registrar usuario          |
-| POST   | `/login`    | Iniciar sesión             |
-| GET    | `/profile`  | Obtener perfil del usuario |
-
-### Cursos — `/api/courses`
-
-| Método | Ruta            | Descripción                 |
-|--------|-----------------|-----------------------------|
-| GET    | `/`             | Listar cursos               |
-| GET    | `/:id`          | Obtener detalle de un curso |
-| POST   | `/`             | Crear curso *(admin)*       |
-| PUT    | `/:id`          | Actualizar curso *(admin)*  |
-| DELETE | `/:id`          | Eliminar curso *(admin)*    |
-| GET    | `/category/:id` | Cursos por categoría        |
-
-### Carrito — `/api/cart`
-
-| Método | Ruta                | Descripción              |
-|--------|---------------------|--------------------------|
-| GET    | `/`                 | Ver carrito del usuario  |
-| POST   | `/add`              | Agregar curso al carrito |
-| DELETE | `/remove/:courseId` | Eliminar del carrito     |
-| POST   | `/checkout`         | Comprar cursos           |
-
-### Inscripciones — `/api/enrollments`
-
-| Método | Ruta                  | Descripción         |
-|--------|-----------------------|---------------------|
-| GET    | `/`                   | Cursos del usuario  |
-| GET    | `/:courseId/progress` | Ver progreso        |
-| POST   | `/start/:courseId`    | Iniciar curso       |
-| PUT    | `/progress/:courseId` | Actualizar progreso |
-
-### Admin — `/api/admin`
-
-| Método | Ruta               | Descripción            |
-|--------|--------------------|------------------------|
-| GET    | `/users`           | Listar usuarios        |
-| GET    | `/stats`           | Estadísticas generales |
-| GET    | `/courses/popular` | Cursos más vendidos    |
-
-### Salud del Servidor
-
-| Método | Ruta          | Descripción        |
-|--------|---------------|--------------------|
-| GET    | `/api/health` | Estado del backend |
-
----
-
-## Tecnologías
-
-- [Node.js](https://nodejs.org/)
-- [Express.js](https://expressjs.com/)
-- [MongoDB](https://www.mongodb.com/) + [Mongoose](https://mongoosejs.com/)
-- [JWT](https://jwt.io/) — Autenticación
-- [bcryptjs](https://www.npmjs.com/package/bcryptjs)
-- [dotenv](https://www.npmjs.com/package/dotenv)
-- [cors](https://www.npmjs.com/package/cors)
-- [express-validator](https://express-validator.github.io/)
-
----
-
-## Notas Importantes
-
-> - Todas las rutas (excepto `/api/auth`) requieren token JWT
-> - Solo los administradores pueden crear, editar o eliminar cursos
-> - El carrito se limpia automáticamente después del checkout
-> - El progreso del curso se guarda de forma individual por usuario
-> - Los cursos pueden contener módulos y lecciones internas
-
----
-
-## Documentación Futura
-
-- 📄 Swagger UI disponible en `/api/docs` *(en desarrollo)*
-- 🖥️ Panel administrativo web en React *(frontend próximamente)*
+- `src/utils/generateToken.js` contiene lógica JWT adicional y de autenticación.
+- `process.env.CLIENT_URL` permite configurar el origen de CORS desde el frontend.
+- `express-rate-limit` protege contra peticiones abusivas.
+- `helmet` agrega cabeceras de seguridad HTTP.
