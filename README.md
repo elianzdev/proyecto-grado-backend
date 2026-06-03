@@ -22,14 +22,14 @@ Backend para la plataforma, un sistema de cursos para microemprendedores desarro
 ## Estructura del Proyecto
 
 ​```
-emprendix_backend/
+backend/
 ├── src/
 │   ├── config/
-│   │   └── database.js          # Conexión a MongoDB
+│   │   └── db.js          # Conexión a MongoDB
 │   ├── controllers/             # Lógica de negocio
-│   │   ├── auth.controller.js
-│   │   ├── course.controller.js
-│   │   ├── user.controller.js
+│   │   ├── auth-controller.js
+│   │   ├── course-controller.js
+│   │   ├── user-controller.js
 │   │   ├── cart.controller.js
 │   │   └── admin.controller.js
 │   ├── middleware/              # Middleware (auth, roles, errores)
