@@ -43,9 +43,6 @@ Este proyecto implementa el backend de una plataforma de cursos en línea. Está
 
 ```text
 backend
-├─ package.json
-├─ pnpm-lock.yaml
-├─ README.md
 └─ src
    ├─ app.js
    ├─ server.js
@@ -69,6 +66,9 @@ backend
    │  └─ user-routes.js
    └─ utils
       └─ generateToken.js
+├─ package.json
+├─ pnpm-lock.yaml
+└─ README.md
 ```
 
 ## Flujo de ejecución
