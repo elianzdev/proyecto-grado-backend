@@ -108,7 +108,7 @@ backend/
 ## Middlewares
 
 - `auth-middleware.js`
-  - `protect`: valida el JWT y agrega `req.usuario`.
+  - `protect`: valida el JWT y agrega `req.usuario`.s
   - `admin`: valida que el usuario tenga el rol `admin`.
 - `notFound-middleware.js`
   - Captura rutas no definidas.
