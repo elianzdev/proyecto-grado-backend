@@ -1,4 +1,4 @@
-# Backend API - Proyecto Grado 2024-2025 (Emigrado a nuevo repositorio)
+# Backend API - Proyecto Grado 2024-2025 (Emigrado a nuevo repositorio 2026)
 
 ## Descripción
 
