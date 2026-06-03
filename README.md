@@ -25,19 +25,49 @@ Este proyecto implementa el backend de una plataforma de cursos en línea. Está
 
 ## Instalación
 
-1. Abre una terminal en `backend/`.
-2. Instala dependencias:
-   - `pnpm install` o `npm install`
-3. Crea un archivo `.env` con al menos las variables:
-   ```env
-   PORT=5000
-   MONGO_URI=<tu_uri_de_mongodb>
-   JWT_SECRET=<una_clave_secreta>
-   CLIENT_URL=http://localhost:5173
-   ```
-4. Inicia el servidor:
-   - Desarrollo: `pnpm dev` o `npm run dev`
-   - Producción: `pnpm start` o `npm start`
+### 1. Clonar el repositorio
+
+```bash
+git clone <tu_repositorio_url>
+cd proyecto-grado/backend
+```
+
+> Si ya tienes el repositorio descargado, abre una terminal desde `backend/`.
+
+### 2. Instalar dependencias
+
+```bash
+pnpm install
+# o
+npm install
+```
+
+### 3. Configurar variables de entorno
+
+Crea un archivo `.env` en la raíz de `backend/` con al menos las siguientes variables:
+
+```env
+PORT=5000
+MONGO_URI=<tu_uri_de_mongodb>
+JWT_SECRET=<una_clave>
+CLIENT_URL=http://localhost:5173
+```
+
+### 4. Ejecutar el backend
+
+```bash
+pnpm dev
+# o
+npm run dev
+```
+
+Para producción:
+
+```bash
+pnpm start
+# o
+npm start
+```
 
 ## Estructura del proyecto
 
