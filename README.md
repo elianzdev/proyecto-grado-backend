@@ -44,8 +44,6 @@ Este proyecto implementa el backend de una plataforma de cursos en línea. Está
 ```text
 backend
 ├─ src
-│  ├─ app.js
-│  ├─ server.js
 │  ├─ config
 │  │  └─ db.js
 │  ├─ controllers
